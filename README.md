@@ -5,7 +5,7 @@
 To execute:
 
 ```
-python3 simple-pendulum.py [Inital Angle]
+python3 simple-pendulum.py [Initial Angle]
 ```
 
-Specify the inital angle of the simple pendulum as a command line argument.
+Specify the initial angle of the simple pendulum as a command line argument.
