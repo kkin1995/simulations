@@ -1,0 +1,224 @@
+\documentclass[12pt]{article}
+
+\title{Simple Pendulum Simulation}
+\author{Karan}
+
+\usepackage{amsmath}
+\usepackage[margin=1.0in]{geometry}
+
+
+
+\begin{document}
+\maketitle
+
+In this project, we use Python to simulate the Simple Pendulum, with and without the linear approximation.
+In the simulation, we will solve the second order ordinary differential equation using a numerical integration
+technique known as the Runge - Kutta 4th Order Integrator (RK4). \newline
+
+First, we will obtain the equation of motion of the simple pendulum using Lagrangian Mechanics and the Principle of Least
+Action. \newline
+
+[PLACE FIGURE HERE]
+
+In the Cartesian Coordinate System, the Simple Pendulum system has two degrees of freedom whereas
+in Spherical Polar Coordinate Systems, the Simple Pendulum system has only one degree of freedom as shown in the figure. \newline
+
+The equations to transform from Cartesian to Spherical Coordinates are given as,
+
+\begin{equation} \label{eqn1}
+    \begin{split}
+        x &= l\sin{\theta} \\
+        y &= l - l\cos{\theta} \\
+    \end{split}
+\end{equation}
+
+Now taking the first time derivative of equation \ref{eqn1},
+
+\begin{equation} \label{eqn2}
+    \begin{split}
+        \dot{x} &= l \dot{\theta} \cos{\theta}  \\
+        \dot{y} &= l \dot{\theta} \sin{\theta}  \\
+    \end{split}
+\end{equation}
+
+The Kinetic Energy of the Simple Pendulum system is given as,
+
+\begin{equation} \label{eqn3}
+    \begin{split}
+        T &= \frac{1}{2} m v^{2} \\
+        &= \frac{1}{2} m ( \dot{x}^{2} + \dot{y}^{2} ) \\
+    \end{split}
+\end{equation}
+
+where, $m$ is the mass of the bob and $v$ is it's velocity.
+
+\newpage
+
+Substituting equation \ref{eqn2} in equation \ref{eqn3} we obtain,
+
+\begin{equation} \label{eqn4}
+    \begin{split}
+        T &= \frac{1}{2} m ( l^{2} \dot{\theta}^{2} \cos^{2}{\theta} + l^{2} \dot{\theta}^{2} \sin^{2}{\theta} ) \\
+        &= \frac{1}{2} m  l^{2} \dot{\theta}^{2} ( \cos^{2}{\theta} + \sin^{2}{\theta} ) \\
+        T &= \frac{1}{2} m  l^{2} \dot{\theta}^{2} \\
+    \end{split}
+\end{equation}
+
+The Potential Energy of the Simple Pendulum system is given as,
+
+\begin{equation} \label{eqn5}
+    \begin{split}
+        V &= mgy \\
+        &= mg ( l - l\cos{\theta} ) \\
+        V &= mgl ( 1 - \cos{\theta} ) \\
+    \end{split}
+\end{equation}
+
+where, $m$ is the mass of the bob and $g$ is the acceleration due to gravity.
+
+Now, from Lagrangian Mechanics, we know that the Lagrangian is given by,
+
+\begin{equation} \label{eqn6}
+    \begin{split}
+       L &= T - V \\
+    \end{split}
+\end{equation}
+
+Substituting equations \ref{eqn4} and \ref{eqn5} into equation \ref{eqn6}, we obtain,
+
+\begin{equation} \label{eqn7}
+    \begin{split}
+        L &= \frac{1}{2} m  l^{2} \dot{\theta}^{2} - mgl ( 1 - \cos{\theta} ) \\
+    \end{split}
+\end{equation}
+
+With the assumption that there are no external forces, we can use the Principle of Least Action to
+obain Lagrange's Differential Equation. Since there is only one degree of freedom, there will be only
+one second order differential equation to solve.
+
+\begin{equation} \label{eqn8}
+    \begin{split}
+        \frac{d}{dt} \left( \frac{\partial{L}}{\partial{\dot{\theta}}} \right) - \frac{\partial{L}}{\partial{\theta}} = 0                   
+    \end{split}
+\end{equation}
+
+We shall first calculate the two terms in equation \ref{eqn8} and then substitute it back into equation \ref{eqn8}.
+
+\newpage
+
+Calculating the first term,
+
+\begin{equation} \label{eqn9}
+    \begin{split}
+        \frac{\partial{L}}{\partial{\dot{\theta}}} &= m l^{2} \dot{\theta}^{2} \\
+        \frac{d}{dt} \left( \frac{\partial{L}}{\partial{\dot{\theta}}} \right) &= m l^{2} \ddot{\theta}^{2} \\
+    \end{split}
+\end{equation}
+
+Now, calculating the second term,
+
+\begin{equation} \label{eqn10}
+    \begin{split}
+        \frac{\partial{L}}{\partial{\theta}} &= -mgl\sin{\theta} \\
+    \end{split}
+\end{equation}
+
+Now, substituting equation \ref{eqn9} and equation \ref{eqn10} into equation \ref{eqn8},
+
+\begin{equation} \label{eqn11}
+    \begin{split}
+        & m l^{2} \ddot{\theta}^{2} + mgl\sin{\theta} = 0 \\
+        & m l^{2} \ddot{\theta}^{2} = - mgl\sin{\theta} \\
+        & l \ddot{\theta} = - g \sin{\theta} \\
+        & \ddot{\theta} = - \frac{g}{l} \sin{\theta} \\
+    \end{split}
+\end{equation}
+
+Equation \ref{eqn11} is the equation of motion for a Simple Pendulum. In the case that we have
+to solve this equation exactly, we assume that the angle $\theta$ is small and take the linear tern
+from the taylor expansion of $\sin{\theta}$.
+
+The taylor expansion of $\sin{\theta}$ is given as,
+
+\begin{equation} \label{eqn12}
+    \begin{split}
+       \sin{\theta} &= \theta - \frac{\theta^{3}}{6} + \frac{\theta^{5}}{120} + ... \\
+       \sin{\theta} &= \theta \\ 
+    \end{split}
+\end{equation}
+
+Substituting equation \ref{eqn12} in to equation \ref{eqn11} to obtain an approximate linear differential equation,
+
+\begin{equation} \label{eqn13}
+    \begin{split}
+        \ddot{\theta} = - \frac{g}{l} \theta \\
+    \end{split}
+\end{equation}
+
+The solution to equation \ref{eqn13} is well - known. It can be expressed as an exponential. 
+We also assume the following initial condition. At time $t = 0$, the angle $\theta$ is 
+$ \theta_{0} $ Assume the solution:
+
+\begin{equation} \label{eqn14}
+    \begin{split}
+        \theta &= A e^{\lambda t} \\
+        \dot{\theta} &= A \lambda e^{\lambda t} \\
+        \ddot{\theta} &= A \lambda^{2} e^{\lambda t} \\
+        \ddot{\theta} &= \lambda^{2} \theta \\
+    \end{split}
+\end{equation}
+
+\newpage
+
+Now, substituting equation \ref{eqn14} back into equation \ref{eqn13},
+
+\begin{equation} \label{eqn15}
+    \begin{split}
+        \lambda^{2} \theta &= - \frac{g}{l} \theta  \\
+        \lambda^{2} &= - \frac{g}{l} \\
+        \lambda &= \sqrt{- \frac{g}{l}} \\
+        \lambda &=  i \omega \\
+    \end{split}
+\end{equation}
+
+where $\omega = \sqrt{\frac{g}{l}}$ is the frequency of oscillation of the Simple Pendulum.
+Now, we substitute equation \ref{eqn15} back into our assumed solution to obtain,
+
+\begin{equation} \label{eqn16}
+    \begin{split}
+       \theta &= A e^{i \omega t} \\
+    \end{split}
+\end{equation}
+
+As per our initial condition,
+
+\begin{equation} \label{eqn17}
+    \begin{split}
+      \theta_{0} &= A e^{i \omega 0} \\
+      \theta_{0} &= A \\
+    \end{split}
+\end{equation}
+
+Therefore, our solution becomes,
+
+\begin{equation} \label{eqn18}
+    \begin{split}
+        \theta = \theta_{0} e^{i \omega t}
+    \end{split}
+\end{equation}
+
+Taking the real part of the exponential, we obtain,
+
+\begin{equation} \label{eqn19}
+    \begin{split}
+        \theta = \theta_{0} \cos{ (\omega t) }
+    \end{split}
+\end{equation}
+
+The Non-Linear Differential Equation (Equation \ref{eqn11}) will be numerically solved using the
+Runge - Kutta 4th Order (RK-4) Integrator in Python.
+
+Additionally, in the simulation, we will also show the difference between the solutions for
+the Linear and Non-Linear Differential Equations for various angles.
+
+\end{document}
