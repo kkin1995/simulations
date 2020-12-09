@@ -4,8 +4,6 @@ export SimplePendulum, omegaDot
 
 using Plots
 
-initialAngle = 45.0
-
 function SimplePendulum(initialAngle, g = 9.8, L = 1, cycles = 10, step_size = 0.001)
 
     time = range(0.0, stop = cycles, step = step_size)
@@ -38,7 +36,8 @@ function SimplePendulum(initialAngle, g = 9.8, L = 1, cycles = 10, step_size = 0
 
     end
     
-    plt = plot(time, theta, title = "Simple Pendulum", label = "Non - Linear Pendulum")
+    title = "Simple Pendulum Initial Angle: " * string(initialAngle)
+    plt = plot(time, theta, title = title, label = "Non - Linear Pendulum")
     xlabel!("Time")
     ylabel!("Theta θ")
     return theta, omega, plt
@@ -50,6 +49,7 @@ end
 
 
 if abspath(PROGRAM_FILE) == @__FILE__
+    initialAngle = parse(Float64, ARGS[1])
     theta, omega, plt = SimplePendulum(initialAngle)
     savefig(plt, "plot.png")
 end
