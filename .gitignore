@@ -10,3 +10,11 @@ venv/
 *.log
 *.gz
 *.pdf
+
+# Images
+*.png
+*.jpg
+*.jpeg
+
+# Misc Test Scripts
+test.jl
