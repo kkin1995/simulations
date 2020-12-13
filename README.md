@@ -1,5 +1,11 @@
 # Numerical Simulations
 
+## Install the required dependencies:
+
+```
+pip3 install -r requirements.txt
+```
+
 ## 1. Simple Pendulum
 
 To execute:
