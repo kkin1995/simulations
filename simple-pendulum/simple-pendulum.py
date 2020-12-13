@@ -42,7 +42,7 @@ class SimplePendulum:
             self.omega[i+1] = self.omega[i] + domega
 
         plt.plot(self.time, self.theta)
-        return self.theta, self.omega
+        return self.time, self.theta, self.omega
 
     def linear_approximation(self):
         self.omegaLinear = np.sqrt(self.g/self.L)
