@@ -12,8 +12,13 @@ To execute:
 
 For Python:
 ```
-python3 simple-pendulum.py [Initial Angle]
+python3 simple-pendulum/all_in_one.py [Initial Angle]
 ```
+
+The file "simple-pendulum.py" has the implementation of Runge-Kutta 4th Order Method solving the equation of motion.
+
+For the Phase Space trajectory, use the file "phase_space.py"
+For plotting the energy, use the file "energy.py"
 
 If you are importing into a different file, copy the "simple-pendulum.py" into the same folder and add the following line to beginning of your file:
 
