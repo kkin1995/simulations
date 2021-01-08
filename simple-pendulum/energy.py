@@ -21,8 +21,8 @@ def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, cycles = 10, step_size = 0.
         plt.legend(loc = "lower right")
         plt.show()
     
-    return Kinetic_Energy, Potential_Energy, Energy
+    return time, Kinetic_Energy, Potential_Energy, Energy
 
 if __name__ == "__main__":
     initialAngle = 20
-    _, _, _ = plot_energy(initialAngle = initialAngle, plotting = True)
+    _, _, _, _ = plot_energy(initialAngle = initialAngle, plotting = True)
