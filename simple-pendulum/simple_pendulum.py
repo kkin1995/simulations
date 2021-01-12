@@ -45,7 +45,7 @@ class SimplePendulum:
         p_theta = self.m * self.L**2 * self.omega
 
         if plotting:
-            plt.plot(self.time, self.theta)
+            plt.plot(self.time, self.theta, label = "Non-Linear")
         return self.time, self.theta, self.omega, p_theta
 
     def linear_approximation(self, plotting = False):
@@ -53,7 +53,7 @@ class SimplePendulum:
         self.thetaLinear = np.array([np.radians(self.initialAngle) * np.cos(self.omegaLinear * t) for t in self.time])
         
         if plotting:
-            plt.plot(self.time, self.thetaLinear)
+            plt.plot(self.time, self.thetaLinear, label = "Linear")
         return self.thetaLinear
 
     def plot_the_solution(self):
@@ -61,16 +61,32 @@ class SimplePendulum:
         plt.title("Initial Angle: " + str(self.initialAngle) + " Degrees")
         plt.xlabel("Time")
         plt.ylabel("Angle (Radians)")
-        plt.legend(["Non-Linear", "Linear"], loc="upper right")
+        plt.legend(loc="upper right")
         plt.show()
 
 
 
 if __name__ == "__main__":
+    import yaml
     # Initial Conditions
-    initialAngle = int(sys.argv[1]) # Degrees
+    with open('parameters.yaml') as file:
+        data = yaml.load(file, Loader = yaml.FullLoader)
 
-    pendulum = SimplePendulum(initialAngle)
-    pendulum.non_linear_rk4()
-    pendulum.linear_approximation()
+    g = data["g"]
+    m = data["m"]
+    L = data["L"]
+    cycles = data["cycles"]
+    step_size = data["step_size"]
+    initialAngle = data["initialAngle"]
+
+    print("Initial Angle = " + str(initialAngle) + " Degrees")
+    print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
+    print("Mass of the Bob = " + str(m) + " Kg")
+    print("Length of the Pendulum = " + str(L) + " m")
+    print("Number of Oscillations = " + str(cycles))
+    print("Chosen Step Size for RK4 = " + str(step_size))
+
+    pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, cycles = cycles, step_size = step_size)
+    _, _, _, _ = pendulum.non_linear_rk4(plotting = True)
+    _ = pendulum.linear_approximation(plotting = True)
     pendulum.plot_the_solution()

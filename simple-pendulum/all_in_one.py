@@ -3,8 +3,26 @@ from phase_space import multiple_phase_plot
 from energy import plot_energy
 import matplotlib.pyplot as plt
 import sys
+import yaml
 
-initialAngle = int(sys.argv[1])
+with open('parameters.yaml') as file:
+    data = yaml.load(file, Loader = yaml.FullLoader)
+
+g = data["g"]
+m = data["m"]
+L = data["L"]
+cycles = data["cycles"]
+step_size = data["step_size"]
+initialAngle = data["initialAngle"]
+
+print("Initial Angle = " + str(initialAngle) + " Degrees")
+print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
+print("Mass of the Bob = " + str(m) + " Kg")
+print("Length of the Pendulum = " + str(L) + " m")
+print("Number of Oscillations = " + str(cycles))
+print("Chosen Step Size for RK4 = " + str(step_size))
+
+#initialAngle = int(sys.argv[1])
 figure_title = "Simple Pendulum | Initial Angle = " + str(initialAngle) + " Degrees"
 
 fig, axs = plt.subplots(2, 2)

@@ -1,0 +1,19 @@
+# Parameters
+
+# Acceleration due to gravity
+g: 9.81
+
+# Mass of the bob
+m: 1
+
+# Length of the pendulum
+L: 1
+
+# Number of Oscillations of the pendulum
+cycles: 10
+
+# Step Size for discretization to use in the RK4 integrator
+step_size: 0.001
+
+# Inital Angle for the Pendulum
+initialAngle: 45
