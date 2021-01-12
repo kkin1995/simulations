@@ -27,7 +27,7 @@ axs[0, 1].plot(time, Energy, label = "Total Energy")
 axs[0, 1].legend(prop = {"size": 6}, loc = "lower right")
 
 pendulum = SimplePendulum(initialAngle = initialAngle)
-time, theta, omega = pendulum.non_linear_rk4()
+time, theta, omega, p_theta = pendulum.non_linear_rk4()
 axs[1, 0].set_title(r"$\theta$")
 axs[1, 0].set_xlabel("Time (seconds)")
 axs[1, 0].set_ylabel(r"$\theta$")

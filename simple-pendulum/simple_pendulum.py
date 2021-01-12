@@ -4,8 +4,9 @@ import sys
 
 
 class SimplePendulum:
-    def __init__(self, initialAngle, g = 9.8, L = 1, cycles = 10, step_size = 0.001):
+    def __init__(self, initialAngle, g = 9.8, m = 1, L = 1, cycles = 10, step_size = 0.001):
         self.g = g
+        self.m = m
         self.L = L
         self.cycles = cycles
         self.step_size = step_size
@@ -40,10 +41,12 @@ class SimplePendulum:
 
             self.theta[i+1] = self.theta[i] + dtheta
             self.omega[i+1] = self.omega[i] + domega
+        
+        p_theta = self.m * self.L**2 * self.omega
 
         if plotting:
             plt.plot(self.time, self.theta)
-        return self.time, self.theta, self.omega
+        return self.time, self.theta, self.omega, p_theta
 
     def linear_approximation(self, plotting = False):
         self.omegaLinear = np.sqrt(self.g/self.L)

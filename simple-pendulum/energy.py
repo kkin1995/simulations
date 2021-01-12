@@ -4,8 +4,8 @@ from numpy import cos
 
 
 def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, cycles = 10, step_size = 0.001, plotting = False):
-    pend = SimplePendulum(initialAngle = initialAngle, g = g, L = L, cycles = cycles, step_size = step_size)
-    time, theta, thetaDot = pend.non_linear_rk4()
+    pend = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, cycles = cycles, step_size = step_size)
+    time, theta, thetaDot, _ = pend.non_linear_rk4()
     
     Kinetic_Energy = (1/2) * m * (L ** 2) * (thetaDot ** 2)
     Potential_Energy = m * g * L * (1 - cos(theta))
