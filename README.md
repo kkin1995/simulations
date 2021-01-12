@@ -10,9 +10,11 @@ pip3 install -r requirements.txt
 
 To execute:
 
+Edit the file "parameters.yaml" to modify the parameters for the Pendulum.
+
 For Python:
 ```
-python3 simple-pendulum/all_in_one.py [Initial Angle]
+python3 simple-pendulum/all_in_one.py
 ```
 
 The file "simple-pendulum.py" has the implementation of Runge-Kutta 4th Order Method solving the equation of motion.
