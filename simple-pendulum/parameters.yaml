@@ -1,7 +1,8 @@
 # Parameters
 
 # Acceleration due to gravity
-g: 1.6
+# Accepted Values for Planet: Earth, Moon, Mars
+planet: Earth
 
 # Mass of the bob
 m: 1

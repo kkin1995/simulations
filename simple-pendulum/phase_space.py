@@ -56,7 +56,14 @@ if __name__ == "__main__":
         with open('parameters.yaml') as file:
             data = yaml.load(file, Loader = yaml.FullLoader)
 
-        g = data["g"]
+        #g = data["g"]
+        planet = data["planet"]
+        if planet.lower() == "earth":
+            g = 9.81
+        elif planet.lower() == "moon":
+            g = 1.6
+        elif planet.lower() == "mars":
+            g = 3.72076
         m = data["m"]
         L = data["L"]
         totalTime= data["totalTime"]
