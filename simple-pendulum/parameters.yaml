@@ -8,7 +8,7 @@ planet: Earth
 m: 1
 
 # Length of the pendulum
-L: 10
+L: 1
 
 # Total amount of time
 totalTime: 10
@@ -17,4 +17,4 @@ totalTime: 10
 step_size: 0.001
 
 # Inital Angle for the Pendulum
-initialAngle: 20
+initialAngle: 10
