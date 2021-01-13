@@ -5,64 +5,73 @@ import matplotlib.pyplot as plt
 import sys
 import yaml
 
-with open('parameters.yaml') as file:
-    data = yaml.load(file, Loader = yaml.FullLoader)
 
-#g = data["g"]
-planet = data["planet"]
-if planet.lower() == "earth":
-    g = 9.81
-elif planet.lower() == "moon":
-    g = 1.6
-elif planet.lower() == "mars":
-    g = 3.72076
-m = data["m"]
-L = data["L"]
-totalTime = data["totalTime"]
-step_size = data["step_size"]
-initialAngle = data["initialAngle"]
+def plot_all(specification_file, show_plot = False, save_plot = False):
 
-print("Initial Angle = " + str(initialAngle) + " Degrees")
-print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
-print("Mass of the Bob = " + str(m) + " Kg")
-print("Length of the Pendulum = " + str(L) + " m")
-print("Total Time = " + str(totalTime))
-print("Chosen Step Size for RK4 = " + str(step_size))
+    with open(specification_file) as file:
+        data = yaml.load(file, Loader = yaml.FullLoader)
 
-#initialAngle = int(sys.argv[1])
-figure_title = "Simple Pendulum | Initial Angle = " + str(initialAngle) + " Degrees"
+    planet = data["planet"]
+    if planet.lower() == "earth":
+        g = 9.81
+    elif planet.lower() == "moon":
+        g = 1.6
+    elif planet.lower() == "mars":
+        g = 3.72076
+    m = data["m"]   
+    L = data["L"]
+    totalTime = data["totalTime"]
+    step_size = data["step_size"]
+    initialAngle = data["initialAngle"]
 
-fig, axs = plt.subplots(2, 2)
+    print("Initial Angle = " + str(initialAngle) + " Degrees")
+    print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
+    print("Mass of the Bob = " + str(m) + " Kg")
+    print("Length of the Pendulum = " + str(L) + " m")
+    print("Total Time = " + str(totalTime))
+    print("Chosen Step Size for RK4 = " + str(step_size))
 
-fig.suptitle(figure_title)
+    figure_title = "Simple Pendulum | Initial Angle = " + str(initialAngle) + " Degrees"
 
-theta, omega = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
-axs[0, 0].set_title("Phase Space Trajectory")
-axs[0, 0].set_xlabel(r"$\theta$")
-axs[0, 0].set_ylabel(r"$\dot{\theta}$")
-axs[0, 0].plot(theta, omega)
+    fig, axs = plt.subplots(2, 2)
 
-time, Kinetic_Energy, Potential_Energy, Energy = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
-axs[0, 1].set_title("Energy")
-axs[0, 1].set_xlabel("Time (seconds)")
-axs[0, 1].set_ylabel("Energy")
-axs[0, 1].plot(time, Kinetic_Energy, label = "Kinetic Energy")
-axs[0, 1].plot(time, Potential_Energy, label = "Potential Energy")
-axs[0, 1].plot(time, Energy, label = "Total Energy")
-axs[0, 1].legend(prop = {"size": 6}, loc = "lower right")
+    fig.suptitle(figure_title)
 
-pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
-time, theta, omega, p_theta = pendulum.non_linear_rk4()
-axs[1, 0].set_title(r"$\theta$")
-axs[1, 0].set_xlabel("Time (seconds)")
-axs[1, 0].set_ylabel(r"$\theta$")
-axs[1, 0].plot(time, theta)
+    theta, omega = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
+    axs[0, 0].set_title("Phase Space Trajectory")
+    axs[0, 0].set_xlabel(r"$\theta$")
+    axs[0, 0].set_ylabel(r"$\dot{\theta}$")
+    axs[0, 0].plot(theta, omega)
 
-axs[1, 1].set_title(r"$\dot{\theta}$")
-axs[1, 1].set_xlabel("Time (seconds)")
-axs[1, 1].set_ylabel(r"$\dot{\theta}$")
-axs[1, 1].plot(time, omega)
+    time, Kinetic_Energy, Potential_Energy, Energy = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
+    axs[0, 1].set_title("Energy")
+    axs[0, 1].set_xlabel("Time (seconds)")
+    axs[0, 1].set_ylabel("Energy")
+    axs[0, 1].plot(time, Kinetic_Energy, label = "Kinetic Energy")
+    axs[0, 1].plot(time, Potential_Energy, label = "Potential Energy")
+    axs[0, 1].plot(time, Energy, label = "Total Energy")
+    axs[0, 1].legend(prop = {"size": 6}, loc = "lower right")
 
-plt.tight_layout()
+    pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
+    time, theta, omega, _ = pendulum.non_linear_rk4()
+    axs[1, 0].set_title(r"$\theta$")
+    axs[1, 0].set_xlabel("Time (seconds)")
+    axs[1, 0].set_ylabel(r"$\theta$")
+    axs[1, 0].plot(time, theta)
 
-plt.show()
+    axs[1, 1].set_title(r"$\dot{\theta}$")
+    axs[1, 1].set_xlabel("Time (seconds)")
+    axs[1, 1].set_ylabel(r"$\dot{\theta}$")
+    axs[1, 1].plot(time, omega)
+
+    plt.tight_layout()
+
+    if show_plot:
+        plt.show()
+
+    if save_plot:
+        plt.savefig("simple-pendulum.png")
+
+if __name__ == "__main__":
+    specification_file = "parameters.yaml"
+    plot_all(specification_file, show_plot = True)
