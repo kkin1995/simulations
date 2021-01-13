@@ -46,13 +46,13 @@ if __name__ == "__main__":
     import sys
     import yaml
 
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 1:
         initialAngles = []
         for element in sys.argv[1:]:
             initialAngles.append(int(element))
         multiple_phase_plot(initialAngles, plotting = True)
 
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 1:
         with open('parameters.yaml') as file:
             data = yaml.load(file, Loader = yaml.FullLoader)
 
