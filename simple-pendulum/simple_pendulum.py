@@ -4,14 +4,14 @@ import sys
 
 
 class SimplePendulum:
-    def __init__(self, initialAngle, g = 9.8, m = 1, L = 1, cycles = 10, step_size = 0.001):
+    def __init__(self, initialAngle, g = 9.8, m = 1, L = 1, totalTime = 10, step_size = 0.001):
         self.g = g
         self.m = m
         self.L = L
-        self.cycles = cycles
+        self.totalTime = totalTime
         self.step_size = step_size
         self.initialAngle = initialAngle
-        self.time = np.arange(start = 0, stop = cycles, step = step_size)
+        self.time = np.arange(start = 0, stop = totalTime, step = step_size)
 
     def omegaDot(self, theta):
         return (-self.g / self.L) * np.sin(theta)
@@ -75,7 +75,7 @@ if __name__ == "__main__":
     g = data["g"]
     m = data["m"]
     L = data["L"]
-    cycles = data["cycles"]
+    totalTime = data["totalTime"]
     step_size = data["step_size"]
     initialAngle = data["initialAngle"]
 
@@ -83,10 +83,10 @@ if __name__ == "__main__":
     print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
     print("Mass of the Bob = " + str(m) + " Kg")
     print("Length of the Pendulum = " + str(L) + " m")
-    print("Number of Oscillations = " + str(cycles))
+    print("Total Time = " + str(totalTime))
     print("Chosen Step Size for RK4 = " + str(step_size))
 
-    pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, cycles = cycles, step_size = step_size)
+    pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
     _, _, _, _ = pendulum.non_linear_rk4(plotting = True)
     _ = pendulum.linear_approximation(plotting = True)
     pendulum.plot_the_solution()

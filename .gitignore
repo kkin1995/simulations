@@ -21,3 +21,6 @@ test.jl
 
 # Misc Python Stuff
 __pycache__/
+misc.py
+
+*.mp4

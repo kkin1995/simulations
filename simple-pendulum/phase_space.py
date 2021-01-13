@@ -1,12 +1,12 @@
 from simple_pendulum import SimplePendulum
 import matplotlib.pyplot as plt
 
-def multiple_phase_plot(initialAngles, m = 1, L = 1, g = 9.8, cycles = 10, step_size = 0.001, plotting = False):
+def multiple_phase_plot(initialAngles, m = 1, L = 1, g = 9.8, totalTime = 10, step_size = 0.001, plotting = False):
     if type(initialAngles) is not list:
         initialAngles = [initialAngles]
 
     for initialAngle in initialAngles:
-        pend = SimplePendulum(initialAngle = initialAngle, m = m, L = L, g = g, cycles = cycles, step_size = step_size)
+        pend = SimplePendulum(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
         _, theta, omega, _ = pend.non_linear_rk4()
         if plotting:
             plt.plot(theta, omega, label = str(initialAngle) + " degrees")
@@ -21,8 +21,8 @@ def multiple_phase_plot(initialAngles, m = 1, L = 1, g = 9.8, cycles = 10, step_
     return theta, omega
 
 
-def momentum(initialAngle, m = 1, L = 1, g = 9.8, cycles = 10, step_size = 0.001, plot_time_theta = False, plot_phase_space = False):
-    pend = SimplePendulum(initialAngle = initialAngle, m = m, L = L, cycles = cycles, step_size = step_size)
+def momentum(initialAngle, m = 1, L = 1, g = 9.8, totalTime = 10, step_size = 0.001, plot_time_theta = False, plot_phase_space = False):
+    pend = SimplePendulum(initialAngle = initialAngle, m = m, L = L, totalTime = totalTime, step_size = step_size)
     time, theta, _, p_theta = pend.non_linear_rk4()
     
     if plot_time_theta:
@@ -59,7 +59,7 @@ if __name__ == "__main__":
         g = data["g"]
         m = data["m"]
         L = data["L"]
-        cycles = data["cycles"]
+        totalTime= data["totalTime"]
         step_size = data["step_size"]
         initialAngle = data["initialAngle"]
 
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         print("Acceleration Due to Gravity = " + str(g) + " m/s^2")
         print("Mass of the Bob = " + str(m) + " Kg")
         print("Length of the Pendulum = " + str(L) + " m")
-        print("Number of Oscillations = " + str(cycles))
+        print("Total Time = " + str(totalTime))
         print("Chosen Step Size for RK4 = " + str(step_size))
 
-        _, _ = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, cycles = cycles, step_size = step_size, plotting = True)   
+        _, _ = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, plotting = True)   
