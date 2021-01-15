@@ -11,13 +11,14 @@ def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, totalTime = 10, step_size =
     Potential_Energy = m * g * L * (1 - cos(theta))
     Energy = Kinetic_Energy + Potential_Energy
 
-    plt.title("Energy | Initial Angle = " + str(initialAngle) + r"$^\circ$")
-    plt.xlabel("Time (s)")
-    plt.ylabel("Energy")
-    plt.plot(time, Kinetic_Energy, label = "Kinetic Energy")
-    plt.plot(time, Potential_Energy, label = "Potential Energy")
-    plt.plot(time, Energy, label = "Total Energy")
-    plt.legend(loc = "lower right")
+    if (show == True) or (save == True):
+        plt.title("Energy | Initial Angle = " + str(initialAngle) + r"$^\circ$")
+        plt.xlabel("Time (s)")
+        plt.ylabel("Energy")
+        plt.plot(time, Kinetic_Energy, label = "Kinetic Energy")
+        plt.plot(time, Potential_Energy, label = "Potential Energy")
+        plt.plot(time, Energy, label = "Total Energy")
+        plt.legend(loc = "lower right")
     if show:    
         plt.show()
     if save:

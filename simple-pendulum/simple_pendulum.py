@@ -44,8 +44,8 @@ class SimplePendulum:
         
         p_theta = self.m * self.L**2 * self.omega
 
-
-        plt.plot(self.time, self.theta, label = "Non-Linear")
+        if plotting:
+            plt.plot(self.time, self.theta, label = "Non-Linear")
         return self.time, self.theta, self.omega, p_theta
 
     def linear_approximation(self, plotting = False):

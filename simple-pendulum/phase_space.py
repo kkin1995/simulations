@@ -8,7 +8,8 @@ def multiple_phase_plot(initialAngles, m = 1, L = 1, g = 9.8, totalTime = 10, st
     for initialAngle in initialAngles:
         pend = SimplePendulum(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size)
         _, theta, omega, _ = pend.non_linear_rk4()
-        plt.plot(theta, omega, label = str(initialAngle) + " degrees")
+        if (show == True) or (save == True):
+            plt.plot(theta, omega, label = str(initialAngle) + " degrees")
 
     if show:
         plt.title("Phase Space Plot")
