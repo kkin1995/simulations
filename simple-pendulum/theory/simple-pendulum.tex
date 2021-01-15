@@ -5,29 +5,45 @@
 
 \usepackage{amsmath}
 \usepackage[margin=1.0in]{geometry}
-
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{float}
 
 
 \begin{document}
 \maketitle
 
+\begin{center}
+    \textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/}{Link to Code}}}
+\end{center}
+
+
+
 In this project, we use Python to simulate the Simple Pendulum, with and without the linear approximation.
 In the simulation, we will solve the second order ordinary differential equation using a numerical integration
 technique known as the Runge - Kutta 4th Order Integrator (RK4). \newline
 
+\section{Theory}
+
 First, we will obtain the equation of motion of the simple pendulum using Lagrangian Mechanics and the Principle of Least
 Action. \newline
 
-[PLACE FIGURE HERE]
+\begin{figure}
+    \caption{Simple Pendulum}
+    \includegraphics[width = \textwidth]{pendulum}
+    \label{fig:sp}
+\end{figure}
 
 In the Cartesian Coordinate System, the Simple Pendulum system has two degrees of freedom whereas
-in Spherical Polar Coordinate Systems, the Simple Pendulum system has only one degree of freedom as shown in the figure. \newline
+in Spherical Polar Coordinate Systems, the Simple Pendulum system has only one degree of freedom as shown in Figure \ref{fig:sp} \newline
 
 The equations to transform from Cartesian to Spherical Coordinates are given as,
 
 \begin{equation} \label{eqn1}
     \begin{split}
-        x &= l\sin{\theta} \\
+        x &= l\sin{\theta} \\ 
         y &= l - l\cos{\theta} \\
     \end{split}
 \end{equation}
@@ -104,8 +120,6 @@ one second order differential equation to solve.
 
 We shall first calculate the two terms in equation \ref{eqn8} and then substitute it back into equation \ref{eqn8}.
 
-\newpage
-
 Calculating the first term,
 
 \begin{equation} \label{eqn9}
@@ -168,8 +182,6 @@ $ \theta_{0} $ Assume the solution:
     \end{split}
 \end{equation}
 
-\newpage
-
 Now, substituting equation \ref{eqn14} back into equation \ref{eqn13},
 
 \begin{equation} \label{eqn15}
@@ -219,6 +231,82 @@ The Non-Linear Differential Equation (Equation \ref{eqn11}) will be numerically 
 Runge - Kutta 4th Order (RK-4) Integrator in Python.
 
 Additionally, in the simulation, we will also show the difference between the solutions for
-the Linear and Non-Linear Differential Equations for various angles.
+the Linear and Non-Linear Differential Equations for various angles. \newline
+
+The code for the implementation of the Runge - Kutta 4th Order Integrator is given in the file "simple\_pendulum.py"
+in the repository which is linked above. The code can also be found at this \textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/simple_pendulum.py}{Link to File}}}. \newline
+
+The fie "simple\_pendulum.py" contains a python class named "SimplePendulum" which has methods for solving and plotting the equation of motion using
+the RK-4 Integrator and plotting the linear approximate solution \newline
+
+In addition to the implementation of the integrator, there are functional implentations for plotting the phase space trajectory and the energy
+of the simple pendulum. \newline
+
+\section{Comparing the Numerical Solution to the Linear Approximation}
+
+Let us consider a Simple Pendulum oscillating on the planet Earth ($g = 9.81$) with an initial angle of $10^\circ$. Simulating and plotting
+$\theta$ vs time on the same plot we get,
+
+\begin{figure}[H]
+    \centering
+    \caption{Initial Angle = $10^\circ$}
+    \includegraphics[width = \textwidth]{time_theta_10}
+    \label{fig:theta10}
+\end{figure}
+
+As we see from the plot, the two graphs are more or less coninciding which shows us that the small angle approximation is a good approximation for
+very small angles.
+
+Now, if we use initial angle of $45^\circ$, we get the following,
+
+\begin{figure}[H]
+    \centering
+    \caption{Initial Angle = $45^\circ$}
+    \includegraphics[width = \textwidth]{time_theta_45}
+    \label{fig:theta45}
+\end{figure}
+
+Here we see that the solution to our differential equation \ref{eqn11} is different to the solution of the linear approximated differential equation.
+
+\section{Phase Space Trajectory}
+
+Phase Space is the space where all possible states of a system is represented. A single point is phase space corresponds to a unique state of the system.
+
+In this section, we investigate how the trajectory of the Simple Pendulum will vary in phase space when it starts at different initial angles.
+Let us consider four different initial angles: $10^\circ$, $25^\circ$, $45^\circ$ and $90^\circ$. We shall use the file "phase\_space.py" found at this
+\textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/phase_space.py}{Link}}}.
+
+\begin{figure}[H]
+    \centering
+    \caption{Phase Space Trajectory}
+    \includegraphics[width = \textwidth]{phase_space}
+    \label{fig:phasespace}
+\end{figure}
+
+The phase space trajectory (as in Lagrangian Mechanics) is the plot of the velocity of the system as a function of position. In this case, the velocity is
+$\dot{\theta}$ and the position is $\theta$.
+
+Along the phase space trajectories shownn above, the energy of the system is conserved. In other words, they are contour lines of equal energy.
+
+Another defining feature of the phase space trajectory is that the trajectories are closed. This means that the motion of the system is periodic.
+
+\section{Conservation of Energy}
+Earlier, in the section on phase space trajectories, we had said that the trajectories are contour lines of equal energy which means that the energy of the system is
+conserved throughout it's motion. In this section, we will plot the Kinetic Energy, Potential Energy and Total Energy to show that the Kinetic and Potential Energy oscillate
+in just the right way to conserve the Total Energy.
+
+We will use the function "plot\_energy()" which is defined in the file "energy.py" and can be found at this
+\textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/energy.py}{Link}}}.
+
+We will plot the Kinetic, Potential and Total Energy for the pendulum with an inital angle of $10^\circ$.
+
+\begin{figure}[H]
+    \centering
+    \caption{Energy Plot}
+    \includegraphics[width = \textwidth]{energy}
+    \label{fig:energy}
+\end{figure}
+
+As we can see from the plot, the green line is the Total Energy and it is constant for the entire motion of the pendulum.
 
 \end{document}
