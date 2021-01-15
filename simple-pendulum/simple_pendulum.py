@@ -44,8 +44,8 @@ class SimplePendulum:
         
         p_theta = self.m * self.L**2 * self.omega
 
-        if plotting:
-            plt.plot(self.time, self.theta, label = "Non-Linear")
+
+        plt.plot(self.time, self.theta, label = "Non-Linear")
         return self.time, self.theta, self.omega, p_theta
 
     def linear_approximation(self, plotting = False):
@@ -56,13 +56,16 @@ class SimplePendulum:
             plt.plot(self.time, self.thetaLinear, label = "Linear")
         return self.thetaLinear
 
-    def plot_the_solution(self):
+    def plot_the_solution(self, show = False, save = False):
         
         plt.title("Initial Angle: " + str(self.initialAngle) + " Degrees")
         plt.xlabel("Time")
         plt.ylabel("Angle (Radians)")
         plt.legend(loc="upper right")
-        plt.show()
+        if show:
+            plt.show()
+        if save:
+            plt.savefig("Time vs Theta.png")
 
 
 
@@ -96,4 +99,4 @@ if __name__ == "__main__":
     pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
     _, _, _, _ = pendulum.non_linear_rk4(plotting = True)
     _ = pendulum.linear_approximation(plotting = True)
-    pendulum.plot_the_solution()
+    pendulum.plot_the_solution(save = True)

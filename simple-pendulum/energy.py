@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from numpy import cos
 
 
-def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, totalTime = 10, step_size = 0.001, plotting = False):
+def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, totalTime = 10, step_size = 0.001, show = False, save = False):
     pend = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
     time, theta, thetaDot, _ = pend.non_linear_rk4()
     
@@ -11,15 +11,17 @@ def plot_energy(initialAngle, m = 1, L = 1, g = 9.8, totalTime = 10, step_size =
     Potential_Energy = m * g * L * (1 - cos(theta))
     Energy = Kinetic_Energy + Potential_Energy
 
-    if plotting:
-        plt.title("Energy")
-        plt.xlabel("Time (s)")
-        plt.ylabel("Energy")
-        plt.plot(time, Kinetic_Energy, label = "Kinetic Energy")
-        plt.plot(time, Potential_Energy, label = "Potential Energy")
-        plt.plot(time, Energy, label = "Total Energy")
-        plt.legend(loc = "lower right")
+    plt.title("Energy | Initial Angle = " + str(initialAngle) + r"$^\circ$")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Energy")
+    plt.plot(time, Kinetic_Energy, label = "Kinetic Energy")
+    plt.plot(time, Potential_Energy, label = "Potential Energy")
+    plt.plot(time, Energy, label = "Total Energy")
+    plt.legend(loc = "lower right")
+    if show:    
         plt.show()
+    if save:
+        plt.savefig("energy.png")
     
     return time, Kinetic_Energy, Potential_Energy, Energy
 
@@ -48,4 +50,4 @@ if __name__ == "__main__":
     print("Length of the Pendulum = " + str(L) + " m")
     print("Total Time = " + str(totalTime))
     print("Chosen Step Size for RK4 = " + str(step_size))
-    _, _, _, _ = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, plotting = True)
+    _, _, _, _ = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, save = True)
