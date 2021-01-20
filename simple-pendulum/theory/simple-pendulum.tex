@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
 \title{Simple Pendulum Simulation}
-\author{Karan}
+\author{Karan Kinariwala - 19PHY77025}
 
 \usepackage{amsmath}
 \usepackage[margin=1.0in]{geometry}
@@ -37,7 +37,7 @@ Action. \newline
 \end{figure}
 
 In the Cartesian Coordinate System, the Simple Pendulum system has two degrees of freedom whereas
-in Spherical Polar Coordinate Systems, the Simple Pendulum system has only one degree of freedom as shown in Figure \ref{fig:sp} \newline
+in Spherical Polar Coordinate System, the Simple Pendulum system has only one degree of freedom as shown in Figure \ref{fig:sp} \newline
 
 The equations to transform from Cartesian to Spherical Coordinates are given as,
 
@@ -234,7 +234,7 @@ Additionally, in the simulation, we will also show the difference between the so
 the Linear and Non-Linear Differential Equations for various angles. \newline
 
 The code for the implementation of the Runge - Kutta 4th Order Integrator is given in the file "simple\_pendulum.py"
-in the repository which is linked above. The code can also be found at this \textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/simple_pendulum.py}{Link to File}}}. \newline
+in the repository which is linked above. The code can also be found at this \textcolor{blue}{\underline{\href{https://github.com/kkin1995/simulations/simple_pendulum.py}{Link}}}. \newline
 
 The fie "simple\_pendulum.py" contains a python class named "SimplePendulum" which has methods for solving and plotting the equation of motion using
 the RK-4 Integrator and plotting the linear approximate solution \newline
@@ -290,6 +290,15 @@ Along the phase space trajectories shownn above, the energy of the system is con
 
 Another defining feature of the phase space trajectory is that the trajectories are closed. This means that the motion of the system is periodic.
 
+However, if the pendulum begins to oscillate at an initial angle close to $180^\circ$, we will get a discontinuous phase space trajectory as shown below:
+
+\begin{figure}[H]
+    \centering
+    \caption{Phase Space Trajectory - $179.9^\circ$}
+    \includegraphics[width = \textwidth]{phase_space_dis}
+    \label{fig:phasespacediscontinuous}
+\end{figure}
+
 \section{Conservation of Energy}
 Earlier, in the section on phase space trajectories, we had said that the trajectories are contour lines of equal energy which means that the energy of the system is
 conserved throughout it's motion. In this section, we will plot the Kinetic Energy, Potential Energy and Total Energy to show that the Kinetic and Potential Energy oscillate
@@ -307,6 +316,7 @@ We will plot the Kinetic, Potential and Total Energy for the pendulum with an in
     \label{fig:energy}
 \end{figure}
 
-As we can see from the plot, the green line is the Total Energy and it is constant for the entire motion of the pendulum.
+As we can see from the plot, the green line is the Total Energy and it is constant for the entire motion of the pendulum, which is
+indicative of the conservation of energy.
 
 \end{document}
