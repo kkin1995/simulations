@@ -35,9 +35,15 @@ title = "g = " + str(g) + " m/s^2 " + "|" + " m = " + str(m) + " Kg " + "|" + " 
 fig.suptitle(title)
 
 ax[0, 0].plot(theta, omega, "r-")
+ax[0, 0].set_title("Phase Space")
+ax[0, 0].set_xlabel(r"$\theta$")
+ax[0, 0].set_ylabel(r"$\dot{\theta}$")
 particle1, = ax[0, 0].plot([], [], 'bo')
 
 ax[0, 1].plot(time, theta, "r-")
+ax[0, 1].set_title(r"$\theta$")
+ax[0, 1].set_xlabel("Time (s)")
+ax[0, 1].set_ylabel(r"$\theta$")
 particle2, = ax[0, 1].plot([], [], 'bo')
 
 
@@ -59,6 +65,7 @@ else:
 maxTime = max(time)
 line, = ax[1, 1].plot([], [])
 trajectory, = ax[1, 1].plot([],[])
+ax[1, 1].set_title("Pendulum Animation")
 time_template = r"$t = %.1fs$"
 time_text = ax[1, 1].text(0, 0, "")
 theta_template = r"$\theta = %.1f degrees$"
@@ -87,7 +94,7 @@ def animate(i):
     trajectory.set_data(X[:i],Y[:i])
     time_text.set_text(time_template % (i * step_size))
     theta_text.set_text(theta_template % (theta[i] * 57.296))
-    return particle1, particle2, particle3, line, time_text, theta_text
+    return particle1, particle2, particle3, line, trajectory, time_text, theta_text
 
 frames = np.floor(np.linspace(0, len(theta) - 1, int(5 * maxTime))).astype(np.int)
 
