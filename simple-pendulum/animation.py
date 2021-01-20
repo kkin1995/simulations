@@ -67,5 +67,5 @@ frames = np.floor(np.linspace(0, len(X) - 1, int(5 * maxTime))).astype(np.int)
 
 anim = animation.FuncAnimation(fig, animate, frames, init_func = init)
 
-anim.save("animation.mp4")
-#plt.show()
+#anim.save("animation.mp4")
+plt.show()

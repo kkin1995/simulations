@@ -57,7 +57,7 @@ if __name__ == "__main__":
         initialAngles = []
         for element in sys.argv[1:]:
             initialAngles.append(int(element))
-        multiple_phase_plot(initialAngles, save = True)
+        multiple_phase_plot(initialAngles, show = True)
 
     if len(sys.argv) == 1:
         with open('parameters.yaml') as file:
@@ -84,4 +84,4 @@ if __name__ == "__main__":
         print("Total Time = " + str(totalTime))
         print("Chosen Step Size for RK4 = " + str(step_size))
 
-        _, _ = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, save = True)   
+        _, _ = multiple_phase_plot(initialAngles = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, show = True)   

@@ -51,4 +51,4 @@ if __name__ == "__main__":
     print("Length of the Pendulum = " + str(L) + " m")
     print("Total Time = " + str(totalTime))
     print("Chosen Step Size for RK4 = " + str(step_size))
-    _, _, _, _ = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, save = True)
+    _, _, _, _ = plot_energy(initialAngle = initialAngle, m = m, L = L, g = g, totalTime = totalTime, step_size = step_size, show = True)

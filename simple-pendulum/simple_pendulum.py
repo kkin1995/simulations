@@ -99,4 +99,4 @@ if __name__ == "__main__":
     pendulum = SimplePendulum(initialAngle = initialAngle, g = g, m = m, L = L, totalTime = totalTime, step_size = step_size)
     _, _, _, _ = pendulum.non_linear_rk4(plotting = True)
     _ = pendulum.linear_approximation(plotting = True)
-    pendulum.plot_the_solution(save = True)
+    pendulum.plot_the_solution(show = True)
