@@ -45,19 +45,46 @@ ax[1, 0].legend("lower right")
 particle3, = ax[1, 0].plot([], [], "bo")
 
 
+X = L * np.sin(theta)
+Y = - L * np.cos(theta)
+
+if abs(min(X)) > abs(min(Y)):
+    Scale = abs(min(X))
+else:
+    Scale = abs(min(Y))
+
+maxTime = max(time)
+line, = ax[1, 1].plot([], [])
+trajectory, = ax[1, 1].plot([],[])
+time_template = r"$t = %.1fs$"
+time_text = ax[1, 1].text(0, 0, "")
+theta_template = r"$\theta = %.1f degrees$"
+theta_text = ax[1, 1].text(0, 0.02, "")
+
+
 plt.tight_layout()
 
 def init():
     particle1.set_data([], [])
     particle2.set_data([], [])
     particle3.set_data([], [])
-    return particle1, particle2, particle3
+
+    line.set_data([], [])
+    trajectory.set_data([],[])
+    time_text.set_text("")
+    theta_text.set_text("")
+    return particle1, particle2, particle3, line, trajectory, time_text, theta_text
 
 def animate(i):
     particle1.set_data(theta[i], omega[i])
     particle2.set_data(time[i], theta[i])
     particle3.set_data(time[i], Potential_Energy[i])
-    return particle1, particle2, particle3
+
+    line.set_data([0, X[i]], [0, Y[i]])
+    trajectory.set_data(X[:i],Y[:i])
+    time_text.set_text(time_template % (i * step_size))
+    theta_text.set_text(theta_template % (theta[i] * 57.296))
+    return particle1, particle2, particle3, line, time_text, theta_text
 
 frames = np.floor(np.linspace(0, len(theta) - 1, int(5 * maxTime))).astype(np.int)
 
