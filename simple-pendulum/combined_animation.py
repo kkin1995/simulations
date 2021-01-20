@@ -31,6 +31,9 @@ maxTime = max(time)
 
 fig, ax = plt.subplots(nrows = 2, ncols = 2)
 
+title = "g = " + str(g) + " m/s^2 " + "|" + " m = " + str(m) + " Kg " + "|" + " L = " + str(L) + " m " + "|" + " Initial Angle = " + str(initialAngle) + " Degrees"
+fig.suptitle(title)
+
 ax[0, 0].plot(theta, omega, "r-")
 particle1, = ax[0, 0].plot([], [], 'bo')
 
