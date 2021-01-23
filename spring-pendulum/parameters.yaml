@@ -1,0 +1,26 @@
+# Parameters
+
+# Acceleration due to gravity
+# Accepted Values for Planet: Earth, Moon, Mars
+planet: Earth
+
+# Mass of the bob
+m: 1
+
+# Fixed Length of the pendulum
+l0: 1
+
+# Spring Constant (Measure of Stiffness)
+k: 1
+
+# Total amount of time
+totalTime: 200
+
+# Step Size for discretization to use in the RK4 integrator
+step_size: 0.01
+
+# Inital Angle for the Pendulum
+initialAngle: 10
+
+# Initial Extension for the Spring
+initialExtension: 2.0
