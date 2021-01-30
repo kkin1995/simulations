@@ -35,6 +35,16 @@ time, b, theta, v_b, v_theta = pendulum.non_linear_rk4()
 
 
 fig, ax = plt.subplots(1, 2)
+fig.suptitle("Phase Space")
+
 ax[0].plot(theta, v_theta)
+ax[0].set_title("Pendulum")
+ax[0].set_xlabel(r"$\theta$")
+ax[0].set_ylabel(r"$\dot{\theta}$")
+
 ax[1].plot(b, v_b)
+ax[1].set_title("Spring")
+ax[1].set_xlabel(r"$x$")
+ax[1].set_ylabel(r"$\dot{x}$")
+
 plt.show()
