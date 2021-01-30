@@ -8,7 +8,6 @@ import yaml
 with open('parameters.yaml') as file:
     data = yaml.load(file, Loader = yaml.FullLoader)
 
-#g = data["g"]
 planet = data["planet"]
 if planet.lower() == "earth":
     g = 9.81
